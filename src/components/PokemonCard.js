@@ -1,20 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card } from "semantic-ui-react";
 
-function PokemonCard() {
+function PokemonCard({ pokemon }) {
+  const [isClicked, setIsClicked] = useState(false);
+  const capitalized = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
   return (
     <Card>
-      <div>
+      <div onClick={() => setIsClicked(!isClicked)}>
         <div className="image">
-          <img alt="oh no!" />
+          <img alt={pokemon.name} src={isClicked ? pokemon.sprites.back : pokemon.sprites.front} />
         </div>
         <div className="content">
-          <div className="header">POKEMON NAME HERE</div>
+          <div className="header">{capitalized}</div>
         </div>
         <div className="extra content">
           <span>
             <i className="icon heartbeat red" />
-            POKEMON HP HERE hp
+            {pokemon.hp}
           </span>
         </div>
       </div>
